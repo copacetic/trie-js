@@ -1,7 +1,7 @@
 var fs = require("fs");
 
-function trieNode(value, children) {
-  return {value: value, children: children || {}};
+function Trie(value, children) {
+  return {value: value || null, children: children || {}};
 }
 
 function triePrint(root) {
@@ -33,7 +33,7 @@ function trieInsert(trie, word, index) {
     }
   } else {
     var isWord = (word.length - 1 === index);
-    trie.children[word[index]] = trieNode(isWord ? word : null);
+    trie.children[word[index]] = new Trie(isWord ? word : null);
     if (!isWord) {
       trieInsert(trie.children[word[index]], word, index + 1);
     }
@@ -59,7 +59,7 @@ var contains = function(trie, word, index) {
 
 function buildTrie(words) {
   console.log("Beginning to build trie...");
-  var trie = trieNode();
+  var trie = new Trie();
   var word;
   for (var i=0; i < words.length; i++) {
     word = words[i];
