@@ -4,13 +4,14 @@ function Trie(value, children) {
   return {value: value || null, children: children || {}};
 }
 
-function triePrint(root) {
-  console.log(root.value);
-  console.log("===");
-  for (var key in root.children) {
-    triePrint(root.children[key]);
+function triePrint(trie) {
+  for (var value in trie.children) {
+    var childTrie = trie.children[value];
+    if (childTrie.value) {
+      console.log(childTrie.value);
+    }
+    triePrint(childTrie);
   }
-  console.log("===");
 }
 
 function trieInsert(trie, word, index) {
