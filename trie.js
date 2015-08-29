@@ -76,6 +76,14 @@ function isEnglish(trie, word) {
   console.log(word, " is English: ", contains(trie, word));
 }
 
+function runTests(trie) {
+  isEnglish(trie, "aardvark");
+  isEnglish(trie, "hayg");
+  isEnglish(trie, "pernicious");
+  isEnglish(trie, "ingenious");
+  isEnglish(trie, "gabig");
+}
+
 fs.readFile('/usr/share/dict/words', 'utf8', function (err, words) {
   if (err) {
     console.log(err);
@@ -84,9 +92,6 @@ fs.readFile('/usr/share/dict/words', 'utf8', function (err, words) {
   words = words.split('\n');
   var trie = buildTrie(words);
 
-  isEnglish(trie, "aardvark");
-  isEnglish(trie, "hayg");
-  isEnglish(trie, "pernicious");
-  isEnglish(trie, "ingenious");
-  isEnglish(trie, "gabig");
+  runTests();
+
 });
