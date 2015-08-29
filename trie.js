@@ -16,10 +16,14 @@ function triePrint(root) {
 function trieInsert(trie, word, index) {
   index = index || 0;
   if (!root) {
-    console.error("No root passed to trieInsert");
+    console.error("No root passed to trieInsert.");
+    return;
   }
 
-  if (word.length === 0) return;
+  if (word.length === 0) {
+    console.log("Empty string cannot be inserted.");
+    return;
+  }
 
   if (trie.children[word[index]]) {
     if (index === word.length - 1) {
