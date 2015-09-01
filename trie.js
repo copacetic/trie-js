@@ -92,6 +92,5 @@ fs.readFile('/usr/share/dict/words', 'utf8', function (err, words) {
   words = words.split('\n');
   var trie = buildTrie(words);
 
-  runTests();
-
+  runTests(trie);
 });
