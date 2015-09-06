@@ -4,13 +4,18 @@ function Trie(value, children) {
   return {value: value || null, children: children || {}};
 }
 
-function triePrint(trie) {
+function triePrint(trie, depth) {
+  depth = depth || 0;
+  indentation = "";
+  for (var i=0; i < depth; i++) {
+   indentation += "-";
+  }
   for (var value in trie.children) {
     var childTrie = trie.children[value];
     if (childTrie.value) {
-      console.log(childTrie.value);
+      console.log(indentation + childTrie.value);
     }
-    triePrint(childTrie);
+    triePrint(childTrie, depth + 1);
   }
 }
 
@@ -64,7 +69,6 @@ function buildTrie(words) {
   var word;
   for (var i=0; i < words.length; i++) {
     word = words[i];
-    console.log("Inserting ", word);
     trieInsert(trie, word);
   }
   console.log("Done building trie!");
@@ -91,6 +95,7 @@ fs.readFile('/usr/share/dict/words', 'utf8', function (err, words) {
   }
   words = words.split('\n');
   var trie = buildTrie(words);
+  triePrint(trie);
 
   runTests(trie);
 });
